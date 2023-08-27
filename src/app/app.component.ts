@@ -18,13 +18,16 @@ export class AppComponent {
   apiLoaded: Observable<boolean>;
 
   center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
-  zoom = 4;
+  zoom = 1;
 
   vertices: google.maps.LatLngLiteral[] = [
     {lat: 13, lng: 13},
     {lat: -13, lng: 0},
     {lat: 13, lng: -13},
   ];
+
+  markerOptions: google.maps.MarkerOptions = {draggable: false};
+  markerPositions: google.maps.LatLngLiteral[] = [];
 
   constructor(httpClient: HttpClient) {
 
@@ -33,5 +36,10 @@ export class AppComponent {
           map(() => true),
           catchError(() => of(false)),
         );
+  }
+
+  addMarker(event: google.maps.MapMouseEvent) {
+    if(event && event.latLng)
+      this.markerPositions.push(event.latLng.toJSON());
   }
 }
