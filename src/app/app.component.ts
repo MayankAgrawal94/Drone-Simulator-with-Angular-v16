@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../environments/environment.development';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { catchError, map } from 'rxjs/operators';
 export class AppComponent {
   title = 'Drone-Simulator-with-Angular-v16';
 
-  G_API_KEY:string = "YOUR_KEY_HERE"
+  G_API_KEY:string = environment.G_API_KEY
 
   G_MAP_API:string = `https://maps.googleapis.com/maps/api/js?key=${this.G_API_KEY}`
 
