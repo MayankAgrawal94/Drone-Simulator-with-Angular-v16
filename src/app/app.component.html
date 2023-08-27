@@ -1,18 +1,90 @@
-<div *ngIf="apiLoaded | async">
+<div width="100%">
+  <section class="sec-01">
+    <form [formGroup]="latLngForm" (ngSubmit)="onSimulate()">
+      <mat-grid-list cols="10" rowHeight="2:1">
 
-  <google-map height="400px"
-            width="750px"
-            [center]="center"
-            [zoom]="zoom"
-            (mapClick)="addMarker($event)">
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+  
+        <mat-grid-tile>
+          <mat-form-field class="input-01">
+            <mat-label>Latitude</mat-label>
+            <input matInput type="number" formControlName="latitude">
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <mat-form-field class="input-01">
+            <mat-label>Longitude</mat-label>
+            <input matInput type="number" formControlName="longitude">
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <mat-form-field class="input-01">
+            <mat-label>Time (sec.)</mat-label>
+            <input matInput type="number" formControlName="time">
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+  
+        <mat-grid-tile class="btn-01">
+          <!-- <button mat-raised-button color="primary">Simulate</button> -->
+          <button mat-fab extended color="primary" type="submit" [disabled]="!latLngForm.valid">
+            Simulate
+          </button>
+        </mat-grid-tile>
+  
+        <mat-grid-tile class="btn-01">
+          <button mat-raised-button color="primary" 
+            [disabled]="!latLngForm.disabled || simulatePaused || progressCount >=100"
+              (click)="onPause()">
+          Pause</button>
+        </mat-grid-tile>
+  
+        <mat-grid-tile class="btn-01">
+          <button mat-raised-button color="primary" 
+            [disabled]="!latLngForm.disabled || !simulatePaused" (click)="onResume()">
+          Resume</button>
+        </mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="1" class="btn-01">
+          <button mat-raised-button color="" 
+            [disabled]="!latLngForm.disabled"(click)="onReset()">
+          Reset</button>
+        </mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="8">
+          <mat-progress-bar mode="determinate" [value]="progressCount"></mat-progress-bar>
+          <span class="progress-01">{{progressCount}}%</span>
+        </mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+  
+      </mat-grid-list>
+    </form>
+  </section>
 
-    <map-marker *ngFor="let markerPosition of markerPositions"
-      [position]="markerPosition" [options]="markerOptions" 
-      (mapClick)="addMarker($event)">
-    </map-marker>
+  <section class="g-map-1">
+    <div *ngIf="apiLoaded | async">
 
-    <map-polyline [path]="vertices"></map-polyline>
-
-  </google-map>
-
+      <google-map width="90%"  [options]="mainOptions"
+        (mapClick)="addMarker($event)">
+    
+          <map-marker *ngFor="let markerPosition of markerOptions"
+            
+            [options]="markerPosition">
+          </map-marker>
+    
+          <map-polyline [path]="polyVertices" [options]="polylineOptions"></map-polyline>
+    
+      </google-map>
+    
+    </div>
+  </section>
+  
 </div>
