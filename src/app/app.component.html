@@ -1,5 +1,9 @@
-<!-- google-maps-demo.component.html -->
-
 <div *ngIf="apiLoaded | async">
-  <google-map [options]="options"></google-map>
+
+  <google-map height="400px" width="750px" [center]="center" [zoom]="zoom">
+
+    <map-polyline [path]="vertices"></map-polyline>
+    
+  </google-map>
+
 </div>

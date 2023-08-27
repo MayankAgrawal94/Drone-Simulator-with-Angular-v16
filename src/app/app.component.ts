@@ -17,10 +17,14 @@ export class AppComponent {
 
   apiLoaded: Observable<boolean>;
 
-  options: google.maps.MapOptions = {
-    center: {lat: 40, lng: -20},
-    zoom: 2
-  };
+  center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
+  zoom = 4;
+
+  vertices: google.maps.LatLngLiteral[] = [
+    {lat: 13, lng: 13},
+    {lat: -13, lng: 0},
+    {lat: 13, lng: -13},
+  ];
 
   constructor(httpClient: HttpClient) {
 
