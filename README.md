@@ -13,7 +13,7 @@ This App simulates the drone motion on Google Maps based on user-provided inform
 
 ## Quick links 
 
-**For Demo** *[Click here](http://demo.mayankagrawal.co.in/)*, 
+**For Demo** *[Click here](http://drone-simulation.demo.mayankagrawal.co.in/)*, 
 **Other links :** **[Getting the Google Maps API Key](https://developers.google.com/maps/get-started)**,
 **[Angular Google Maps component](https://github.com/angular/components/blob/main/src/google-maps/README.md)**, **[Angular Material](https://material.angular.io/)**
 
